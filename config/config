@@ -1,0 +1,270 @@
+set $mod Mod4
+#########APPEARANCE
+####COLORS
+set $foreground #707070
+set $background #f3f3f3
+set $color0 #efefef
+set $color1 #f15370
+set $color2 #a1d569
+set $color3 #f1c40f
+set $color4 #4cb9dd
+set $color5 #dd94ab
+set $color6 #8ad4d3
+set $color7 #707070
+set $color5 #b3b3b3
+set $color9 #e24535
+set $color10 #36b66c
+set $color11 #f39c12
+set $color12 #42accf
+set $color13 #dc7b99
+set $color14 #57b2b0
+set $color15 #909090
+
+#### Layout Settings
+set $default_gaps_inner 		5
+set $default_gaps_outer 		5
+set $resize 					5
+set $resize_fine				1
+set $bordersize					1
+font 							pango:Roboto Mono, Material Icons 9
+gaps inner						$default_gaps_inner
+gaps outer						$default_gaps_outer
+focus_follows_mouse				no
+mouse_warping 					output
+new_window 						pixel 0
+smart_borders 					no_gaps
+workspace_auto_back_and_forth	yes
+force_display_urgency_hint 		0 ms
+focus_on_window_activation 		urgent
+
+####Container && Windows
+#						BORDER		BACKGROUND	TEXT		INDICATOR
+client.focused	  		$color12	$color12    $color0		$color5
+client.unfocused		$color8 	$color8    	$foreground	$color5
+client.focused_inactive $color7		$color7		$color0		$color5
+client.urgent	   		$color1		$color1		$color0		$color5
+## Disable Borders
+new_window pixel 0
+
+#KEYBOARD SHORTCUTS
+bindsym $mod+shift+w     exec --no-startup-id google-chrome-stable
+bindsym $mod+shift+t     exec --no-startup-id gnome-terminal
+bindsym $mod+shift+s     exec --no-startup-id spotify
+
+
+# volume control keys
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q set Master toggle && pkill -RTMIN+1 i3blocks
+
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 -time 0 -steps 1 && pkill -RTMIN+3 i3blocks
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 0 -steps 1 && pkill -RTMIN+3 i3blocks
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec gnome-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Startup programs
+exec --no-startup-id feh --bg-fill ~/Desktop/Background.jpeg
+exec --no-startup-id rofi &
+bindsym control+space exec --no-startup-id j4-dmenu-desktop --dmenu="rofi -i -dmenu -p ''"
+exec --no-startup-id xset dpms 900
+
+
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+set $tag1 "www"
+set $tag2 "music"
+set $tag3 "term"
+set $tag4 "irc"
+set $tag5 "misc"
+
+# switch to workspace
+bindsym $mod+1 workspace $tag1
+bindsym $mod+2 workspace $tag2
+bindsym $mod+3 workspace $tag3
+bindsym $mod+4 workspace $tag4
+bindsym $mod+5 workspace $tag5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $tag1
+bindsym $mod+Shift+2 move container to workspace $tag2
+bindsym $mod+Shift+3 move container to workspace $tag3
+bindsym $mod+Shift+4 move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+## Power Control
+set $mode_power   ::   (L)ock | (E)xit | (S)uspend | (H)ibernate | (R)eboot | (P)oweroff
+mode "$mode_power" {
+  bindsym l mode "default", exec --no-startup-id $HOMEME/.config/i3/scripts/i3lock.sh $HOME/.config/i3/scripts/alt2_lock.png
+  bindsym e mode "default", exec --no-startup-id $HOME/.config/i3/scripts/i3exit logout
+  bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/scripts/i3exit suspend
+  bindsym h mode "default", exec --no-startup-id $HOME/.config/i3/scripts/i3exit hibernate
+  bindsym r mode "default", exec --no-startup-id $HOME/.config/i3/scripts/i3exit reboot
+  bindsym p mode "default", exec --no-startup-id $HOME/.config/i3/scripts/i3exit shutdown
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_power"
+
+
+################
+##    BARS    ##
+################
+## Top Bar
+bar {
+#	i3bar_command 			i3bar -t
+	status_command 			i3blocks -v -c /home/bryce/.config/i3blocks/bar-top
+
+	# Positioning
+	position 				top
+#	output 					DP-0
+
+	# Disable SCROLLWHEEL in bar
+	bindsym button4 		nop
+	bindsym button5 		nop
+
+	workspace_buttons 		yes
+	strip_workspace_numbers	yes
+	# Hide Mode Indicatiors
+	binding_mode_indicator	no
+
+	tray_output 			primary
+
+	font 					pango:Roboto Mono, Icons 9
+	height 					20
+
+	colors {
+		statusline			$foreground
+		background			$background
+		separator			$background
+
+		#					BORDER		BACKGROUND  	TEXT
+		focused_workspace			$background	$background		$color8
+		inactive_workspace			$background	$background		$color8
+		active_workspace			$background	$background		$color7
+		urgent_workspace			$background	$background		$color1
+	}
+}
+
+bar {
+  i3bar_command i3bar -t
+  status_command i3blocks -c $HOME/.config/i3blocks/bar-bot
+  position bottom
+  #output                 DP-4
+
+  ## Disable SCROLLWHEEL in bar
+  ##bindsym button4 nop
+  ##bindsym button5 nop
+#
+  workspace_buttons no
+  strip_workspace_numbers yes
+#
+  tray_output none
+#
+  font pango:Roboto Mono, Icons 9
+  height                             25
+#
+  colors {
+    statusline #dbdbdb
+    background #343434AB
+    separatorator$color7
+  }
+}

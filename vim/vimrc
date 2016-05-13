@@ -1,0 +1,39 @@
+execute pathogen#infect()
+filetype on
+syntax on
+set syn=c
+colorscheme Tomorrow-Night-Eighties
+set ts=2
+set shiftwidth=2
+set autoindent
+set smartindent
+set colorcolumn=90
+set number
+"Set space as leader and reload config with space
+let mapleader=" "
+map <leader>s :source ~/.vimrc<CR>
+
+set hidden
+set history=100
+
+"Remove whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+"Open previous file
+nnoremap <Leader><Leader> :e#<CR>
+
+"Show matchign parenthesis
+set showmatch
+
+"NerdTree Settings
+let NERDTreeMapActivateNode='<right>'
+let NERDTreeShowHidden=1
+nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>j :NERDTreeFind<CR>
+let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
+"Autoclose nerdtree if only window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"CtrlP Settings
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'

@@ -1,0 +1,19 @@
+markup=pango
+separator=false
+command=~/.config/i3blocks/blocklets/$BLOCK_NAME
+separator_block_width=10
+
+[window label]
+full_text=
+color=#42accf
+
+[window]
+command=xtitle -s
+interval=persist
+color=#707070
+separator_block_width=25
+
+[time]
+command=echo "<span color='#7a7a7a'>`date +'%a %d %b'`</span> <b>`date +'%r'`</b>"; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal
+interval=1
+color=#707070
