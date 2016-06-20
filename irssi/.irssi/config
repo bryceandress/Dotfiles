@@ -3,7 +3,7 @@ servers = (
     address = "irc.freenode.net";
     chatnet = "Freenode";
     port = "6667";
-    password = "ENTER";
+    password = "Andress1";
     use_ssl = "no";
     ssl_verify = "no";
     autoconnect = "yes";
@@ -13,7 +13,7 @@ servers = (
 Freenode = {
   type = "IRC";
   nick = "Kingceasar";
-  autosendcmd = "/^msg NickServ IDENTIFY ENTER;wait 2000";
+  autosendcmd = "/^msg NickServ IDENTIFY Andress1;wait 2000";
   max_kicks = "1";
   max_msgs = "4";
   max_whois = "1";
@@ -26,8 +26,7 @@ channels = (
   { name = "#vulnhub"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##re"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#radare"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#opentoall"; chatnet = "freenode"; autojoin = "yes"; },
-	{ name = "##asm"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#opentoall"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
